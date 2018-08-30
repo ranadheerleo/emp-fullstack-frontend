@@ -1,0 +1,18 @@
+.employee-table{
+    width:70%;
+}
+.employee-table thead{
+    background-color: lightgray;
+}
+
+.employee-table-div {
+    overflow: auto;
+}
+
+.title, .add-button, .employee-table {
+    margin-left:20px;
+}
+
+.add-button {
+    margin-bottom: 20px;
+}

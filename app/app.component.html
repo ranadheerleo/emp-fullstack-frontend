@@ -1,0 +1,96 @@
+<h4 class="title">{{message}}</h4>
+<hr>
+<button class="btn btn-primary add-button" (click)="addEmp()">Add</button>
+<div class="employee-table-div">
+    <table class="table table-bordered table-striped employee-table">
+        <thead >
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let emp of employees;let i=idx">
+                <ng-template [ngTemplateOutlet]="loadTemplate(emp)" [ngOutletContext]="{ $implicit: emp, idx: i }"></ng-template>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<div>{{statusMessage}}</div>
+
+
+<!--The Html Template for Read-Only Rows-->
+<ng-template #readOnlyTemplate let-emp>
+    <td>{{emp.id}}</td>
+    <td>{{emp.name}}</td>
+    <td>{{emp.salary}}</td>
+    <td>{{emp.deptartment}}</td>
+    <td>{{emp.designation}}</td>
+    <td>
+        <input type="button" value="Edit" class="btn btn-default" (click)="editEmployee(emp)" />
+    </td>
+    <td>
+        <input type="button" value="Delete" (click)="deleteEmp(emp)" class="btn btn-danger" />
+    </td>
+</ng-template>
+<!--Ends Here-->
+
+<!--The Html Template for Editable Rows-->
+<ng-template #addTemplate>
+    <td>
+        <input type="text" [(ngModel)]="selemp.id" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.name" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.salary" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.deptartment" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.designation" />
+    </td>
+    <td>
+        <input type="button" [disabled]="selemp.id==0" value="Save" (click)="saveEmp()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning" />
+    </td>
+
+</ng-template>
+<!--Ends Here-->
+
+<!--The Html Template for Editable Rows-->
+<ng-template #editTemplate>
+    <td>
+        {{selemp.id}}
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.name" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.salary" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.deptartment" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="selemp.designation" />
+    </td>
+    <td>
+        <input type="button" value="Save" (click)="saveEmp()" class="btn btn-success" />
+    </td>
+    <td>
+        <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning" />
+    </td>
+
+</ng-template>
+<!--Ends Here-->
